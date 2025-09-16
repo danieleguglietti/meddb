@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { IObjective, IQuestionType } from '$lib/server/db/schema';
+	import { ArrowLeftIcon } from '@lucide/svelte';
 
 	import AddButton from './buttons/AddButton.svelte';
 	import RemoveButton from './buttons/RemoveButton.svelte';
@@ -13,6 +14,11 @@
 </script>
 
 <div class="flex h-full flex-col gap-2 overflow-auto card preset-outlined-surface-500 p-4">
+	<a href="/" class="ml-2 btn self-start preset-filled-outlined-500">
+			<ArrowLeftIcon size={18} />
+			<span>Indietro</span>
+		</a>
+		
 	<div class="flex w-full justify-between gap-1">
 		<label class="label w-1/2">
 			<span class="label-text">Tipologia</span>

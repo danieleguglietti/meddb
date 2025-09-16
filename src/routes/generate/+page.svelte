@@ -41,7 +41,7 @@
 		</h1>
 		<div class="h-4/6 w-full rounded-lg">
 			{#if src === undefined}
-				<div class="placeholder animate-pulse"></div>
+				<div class="placeholder animate-pulse h-full w-full"></div>
 			{:else}
 				<iframe {src} title="PDF" class="h-full w-full rounded-lg"> </iframe>
 			{/if}
