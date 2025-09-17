@@ -50,12 +50,13 @@ export const actions = {
 
 		let question: Question;
 
+		
 		const type = params.get('type');
 		if (!type) return fail(400, { type, missing: true });
-
+		
 		const text = params.get('question');
 		if (!text) return fail(400, { text, missing: true });
-
+		
 		const objective = params.get('objective');
 		if (!objective) return fail(400, { objective, missing: true });
 
@@ -70,7 +71,10 @@ export const actions = {
 			params
 				.entries()
 				.filter(([k, _]) => k.startsWith('answer'))
+				.filter(([_, v]) => v.toString().length !== 0)
 				.forEach(([_, v]) => q.answers.push(v as string));
+
+			if (q.answers.length < 2) return fail(400, { answers: q.answers, missing: true });
 
 			question = q;
 		}
