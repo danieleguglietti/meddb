@@ -29,7 +29,7 @@
 </svelte:head>
 
 <div class="flex h-screen w-screen justify-center">
-	<div class="flex w-2/3 flex-col items-center justify-center gap-5">
+	<div class="flex w-full md:w-4/6 flex-col items-center justify-center gap-5 p-5">
 		<h1 class="h2">
 			{#if src === undefined}
 				IL QUIZ È IN GENERAZIONE.
@@ -39,14 +39,16 @@
 				> È STATO GENERATO.
 			{/if}
 		</h1>
-		<div class="h-4/6 w-full rounded-lg">
+		<div class="md:h-5/6 w-full rounded-lg flex flex-col gap-5">
 			{#if src === undefined}
-				<div class="placeholder animate-pulse h-full w-full"></div>
+				<div class="h-full placeholder w-full animate-pulse"></div>
 			{:else}
-				<iframe {src} title="PDF" class="h-full w-full rounded-lg"> </iframe>
+				<object data={src} type="application/pdf" class="hidden h-full w-full rounded-lg md:flex justify-center items-center" title="pdf">
+				</object>
+				<a href={src} download="quiz.pdf" class="md:hidden btn preset-filled-primary-500 w-full">Download</a>
 			{/if}
 		</div>
-		<a href="/" class="ml-2 btn self-start preset-filled-primary-500">
+		<a href="/" class="md:ml-2 btn self-start preset-outlined-primary-500">
 			<ArrowLeftIcon size={18} />
 			<span>Indietro</span>
 		</a>

@@ -4,6 +4,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
 
 import { db } from '$lib/server/db';
+import { dev } from '$app/environment';
 import { user, session, type ISession } from '$lib/server/db/schema';
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
@@ -46,7 +47,7 @@ export async function validateSessionToken(token: string) {
     if (!result) {
         return { session: null, user: null };
     }
-    
+
     const { session: s, user: u } = result;
 
     const sessionExpired = Date.now() >= s.expiresAt.getTime();
@@ -78,7 +79,8 @@ export async function invalidateSession(sessionId: string) {
 export function setSessionTokenCookie(event: RequestEvent, token: string, expiresAt: Date) {
     event.cookies.set(sessionCookieName, token, {
         expires: expiresAt,
-        path: '/'
+        path: '/',
+        secure: !dev
     });
 }
 
